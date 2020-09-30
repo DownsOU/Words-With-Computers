@@ -1,12 +1,13 @@
 package words_with_computers;
 import java.util.ArrayList;
 import java.lang.StringBuilder;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.List;
-import java.util.Scanner;
+import java.io.FileInputStream;
+import net.didion.jwnl.JWNL;
+import net.didion.jwnl.JWNLException;
+import net.didion.jwnl.data.*;
+import net.didion.jwnl.data.list.PointerTargetNodeList;
+import net.didion.jwnl.dictionary.Dictionary;
 
 
 public class PlayComputer {
@@ -20,7 +21,7 @@ public class PlayComputer {
         }
     }
     
-    public void playTurn() throws FileNotFoundException{
+    public void playTurn() throws JWNLException{
         System.out.println(letters);
         ArrayList<String> allPossible = new ArrayList();
         ArrayList<String> words = new ArrayList();
@@ -30,6 +31,12 @@ public class PlayComputer {
 //        for(String s: allPossible){
 //            System.out.println(s);
 //        }
+//        ArrayList<String> testWords = new ArrayList();
+//        testWords.add("ball");
+//        testWords.add("car");
+//        testWords.add("youkert");
+//        testWords.add("backtor");
+//        testWords.add("back");
         
         words = checkWords(allPossible);
         System.out.println(words);
@@ -132,34 +139,27 @@ public class PlayComputer {
         return builder.toString();
     }
     
-    private ArrayList<String> checkWords(ArrayList<String> words) throws FileNotFoundException {
-        File wordFile = new File("words_alpha.txt");
-        Scanner scan = new Scanner(wordFile);
-        while(scan.hasNextLine()){
-            dictionary.add(scan.nextLine());
-        }
-        Pattern compile = Pattern.compile("[aeiou]");
+    private ArrayList<String> checkWords(ArrayList<String> words) throws JWNLException {
         ArrayList<String> wordArray = new ArrayList();
-//        for(String word: words) {
-//           if(word.length() < 3){
-//               words.remove(word);
-//           }
-//           else {
-//               Matcher matcher = compile.matcher(word);
-//               if (matcher.find() == false) {
-//                   words.remove(word);
-//               }
-//           }
-           for(String dict: dictionary) {
-               for(String word: words){
-                    if(word.equals(dict)) {
-                        wordArray.add(word);
-                    }
-                }
+        configureJWordNet();
+        Dictionary wordnet = Dictionary.getInstance();
+        IndexWord[] word;
+        for(String s : words){
+            word = wordnet.lookupAllIndexWords(s).getIndexWordArray();
+            if(word.length != 0) {
+                wordArray.add(s);
             }
+        }
         return wordArray;
     }
     
-     
+   private void configureJWordNet(){
+       try{
+           JWNL.initialize(new FileInputStream("C:\\Users\\david\\Documents\\NetBeansProjects\\Words-With-Computers\\Words_With_Computers\\file_properties.xml"));
+       } catch (Exception ex) {
+            ex.printStackTrace();
+            System.exit(-1);
+       }
+   }  
 }
 
