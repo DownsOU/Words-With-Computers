@@ -22,30 +22,43 @@ public class PlayComputer {
     
     public void playTurn() throws FileNotFoundException{
         System.out.println(letters);
-        ArrayList<ArrayList<Character>> charWordList = new ArrayList();
+        ArrayList<String> allPossible = new ArrayList();
+        ArrayList<String> words = new ArrayList();
+        
+        allPossible = getAllPossible(letters);
+        
+//        for(String s: allPossible){
+//            System.out.println(s);
+//        }
+        
+        words = checkWords(allPossible);
+        System.out.println(words);
+    }
+    
+    public ArrayList<String> getAllPossible(char[] letters) {
         ArrayList<String> stringWordList = new ArrayList();
         ArrayList<ArrayList<String>> combo = new ArrayList();
+        ArrayList<ArrayList<String>> permList = new ArrayList();
         for(int i=3; i<letters.length +1; i++){
             combo.add(getCombinations(letters,i));
         }
         for(ArrayList<String> comb : combo){
             for(String word: comb){
-                stringWordList.add(word);
-                char[] ch = word.toCharArray();
-                charWordList = getPermutations(ch);
-                System.out.println(word);
+                permList.add(getPermutations(word));
             }
         }
-        //System.out.println(combo);
-        //charWordList = getPermutations(letters);
-        for(ArrayList<Character> c : charWordList) {
-            System.out.println(c);
+        for(ArrayList<String> perm: permList) {
+            for(String word: perm) {
+                stringWordList.add(word);
+            }
         }
-        //System.out.println(charWordList);
-        for(int i = 0; i < charWordList.size(); i++) {
-            stringWordList.add(getString(charWordList.get(i)));
+        
+        for(ArrayList<String> comb : combo){
+            for(String word: comb){
+                stringWordList.add(word);
+            }
         }
-        //System.out.println(checkWords(stringWordList));
+        return stringWordList;
     }
     
     private ArrayList<String> getCombinations(char[] letters, int k){
@@ -74,13 +87,22 @@ public class PlayComputer {
         }
     }
     
-    private ArrayList<ArrayList<Character>> getPermutations(char[] elements) {
+    private ArrayList<String> getPermutations(String elements) {
+        char[] letterArray = new char[elements.length()];
+        for(int i =0; i<elements.length(); i++) {
+            letterArray[i] = elements.charAt(i);
+        }
         ArrayList<ArrayList<Character>> result = new ArrayList();
-        permutationHelper(0, elements, result);
-        return result;
+        ArrayList<String> stringResult = new ArrayList();
+        permutationHelper(0, letterArray, result);
+        for(ArrayList<Character> arr: result){
+            stringResult.add(getString(arr));
+        }
+        return stringResult;
     }
     
     private void permutationHelper(int start, char[] letterArray, ArrayList<ArrayList<Character>> result){
+        
         if(start == letterArray.length-1) {
             ArrayList<Character> list = new ArrayList();
             for(char letter:letterArray) {
@@ -118,22 +140,23 @@ public class PlayComputer {
         }
         Pattern compile = Pattern.compile("[aeiou]");
         ArrayList<String> wordArray = new ArrayList();
-        for(String word: words) {
-           if(word.length() < 3){
-               words.remove(word);
-           }
-           else {
-               Matcher matcher = compile.matcher(word);
-               if (matcher.find() == false) {
-                   words.remove(word);
-               }
-           }
+//        for(String word: words) {
+//           if(word.length() < 3){
+//               words.remove(word);
+//           }
+//           else {
+//               Matcher matcher = compile.matcher(word);
+//               if (matcher.find() == false) {
+//                   words.remove(word);
+//               }
+//           }
            for(String dict: dictionary) {
-               if(word.equals(dict)) {
-                   wordArray.add(word);
-               }
-           }
-        }
+               for(String word: words){
+                    if(word.equals(dict)) {
+                        wordArray.add(word);
+                    }
+                }
+            }
         return wordArray;
     }
     
