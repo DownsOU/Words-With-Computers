@@ -13,7 +13,12 @@ import net.didion.jwnl.dictionary.Dictionary;
 public class PlayComputer {
     
     private char letters[] = new char[7];
-    private ArrayList<String> dictionary = new ArrayList();
+    private Dictionary wordnet;
+    
+    public PlayComputer() {
+        configureJWordNet();
+        wordnet = Dictionary.getInstance();
+    }
     
     public void giveLetters(char[] letterArray) {
         for(int i=0; i<letterArray.length; i++){
@@ -31,12 +36,6 @@ public class PlayComputer {
 //        for(String s: allPossible){
 //            System.out.println(s);
 //        }
-//        ArrayList<String> testWords = new ArrayList();
-//        testWords.add("ball");
-//        testWords.add("car");
-//        testWords.add("youkert");
-//        testWords.add("backtor");
-//        testWords.add("back");
         
         words = checkWords(allPossible);
         System.out.println(words);
@@ -46,7 +45,7 @@ public class PlayComputer {
         ArrayList<String> stringWordList = new ArrayList();
         ArrayList<ArrayList<String>> combo = new ArrayList();
         ArrayList<ArrayList<String>> permList = new ArrayList();
-        for(int i=3; i<letters.length +1; i++){
+        for(int i=3; i<letters.length - 1; i++){
             combo.add(getCombinations(letters,i));
         }
         for(ArrayList<String> comb : combo){
@@ -141,8 +140,6 @@ public class PlayComputer {
     
     private ArrayList<String> checkWords(ArrayList<String> words) throws JWNLException {
         ArrayList<String> wordArray = new ArrayList();
-        configureJWordNet();
-        Dictionary wordnet = Dictionary.getInstance();
         IndexWord[] word;
         for(String s : words){
             word = wordnet.lookupAllIndexWords(s).getIndexWordArray();
