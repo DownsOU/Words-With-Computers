@@ -2,8 +2,8 @@ package words_with_computers;
 
 public class Score{
     
-    private String pWrd;
-    private String cpuWrd;
+//    private String pWrd;
+//    private String cpuWrd;
     private static int pScore;
     private static int cpuScore;
     private String winner;

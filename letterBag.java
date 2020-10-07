@@ -1,5 +1,5 @@
 
-package letterBag;
+package words_with_computers;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ public class letterBag {
         }
     }
     
-    public void fillLetterRack() {
+    public ArrayList<Character> fillLetterRack() {
         int randomIndex;
         char randomChar;
         while (playerLetterRack.size() != RACKSIZE) {//Filling the letter rack until the limit of seven is reached.
@@ -30,6 +30,7 @@ public class letterBag {
             letterBag.remove(randomIndex);//Removing that specific letter from the letter bag.
             playerLetterRack.add(randomChar);//Adding that specific letter to the player's letter rack.
         }
+        return playerLetterRack;
     }
     public ArrayList<Character> getLetterRack() {
         return playerLetterRack;

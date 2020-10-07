@@ -15,6 +15,7 @@ public class PlayComputer {
 
     private char letters[] = new char[7];
     private Dictionary wordnet;
+    private String wordPlayed;
 
     public PlayComputer() {
         configureJWordNet();
@@ -28,13 +29,17 @@ public class PlayComputer {
     }
 
     public String playTurn() throws JWNLException { //returns the string of the played word
-        System.out.println(letters);
+        
         ArrayList<String> allPossible = new ArrayList();
         ArrayList<String> words = new ArrayList();
 
         allPossible = getAllPossible(letters);
         words = checkWords(allPossible);
-        String wordPlayed = chooseWord(words);
+        wordPlayed = chooseWord(words);
+        return wordPlayed;
+    }
+    
+    public String getComputerWord() {
         return wordPlayed;
     }
 
