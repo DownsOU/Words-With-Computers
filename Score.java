@@ -1,31 +1,38 @@
-package scrabble.score.pkgclass;
+package words_with_computers;
 
 public class Score{
     
     private String pWrd;
     private String cpuWrd;
-    private int pScore;
-    private int cpuScore;
+    private static int pScore;
+    private static int cpuScore;
     private String winner;
     
-    public Score(String playerWord, String computerWord, int playerScore, int computerScore, String win){
-        pWrd = playerWord;
-        cpuWrd = computerWord;
-        pScore = playerScore;
-        cpuScore = computerScore;
-        winner = win;
+//    public Score(String playerWord, String computerWord, int playerScore, int computerScore, String win){
+//        pWrd = playerWord;
+//        cpuWrd = computerWord;
+//        pScore = playerScore;
+//        cpuScore = computerScore;
+//        winner = win;
+//    }
+    
+//    public String getPlayerWord(){
+//        return pWrd;
+//    }
+//    
+//    public String getCPUWord(){
+//        return cpuWrd;
+//    }
+    
+    public int getPlayerScore() {
+        return pScore;
     }
     
-    public String getPlayerWord(){
-        return pWrd;
+    public int getCPUScore() {
+        return cpuScore;
     }
     
-    public String getCPUWord(){
-        cpuWrd = "scrabble";
-        return cpuWrd;
-    }
-    
-    public int calculateWordScore(String wrd, int score){
+    private int calculateWordScore(String wrd, int score){
         char[] letters = new char[wrd.length()];
         for (int i = 0; i < wrd.length(); i++) { 
             letters[i] = wrd.charAt(i); 
@@ -73,13 +80,13 @@ public class Score{
         return wrdScore;
     }
     
-    public int calculatePlayerScore(){
-        pScore = calculateWordScore(pWrd, pScore);
+    public int calculatePlayerScore(String word){
+        pScore += calculateWordScore(word, pScore);
         return pScore;
     }
     
-    public int calculateCPUScore(){
-        cpuScore = calculateWordScore(cpuWrd, cpuScore);
+    public int calculateCPUScore(String word){
+        cpuScore += calculateWordScore(word, cpuScore);
         return cpuScore;
     }
     
