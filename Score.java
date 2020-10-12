@@ -1,28 +1,16 @@
 package words_with_computers;
 
 public class Score{
-    
-//    private String pWrd;
-//    private String cpuWrd;
+
     private static int pScore;
     private static int cpuScore;
     private String winner;
     
-//    public Score(String playerWord, String computerWord, int playerScore, int computerScore, String win){
-//        pWrd = playerWord;
-//        cpuWrd = computerWord;
-//        pScore = playerScore;
-//        cpuScore = computerScore;
-//        winner = win;
-//    }
-    
-//    public String getPlayerWord(){
-//        return pWrd;
-//    }
-//    
-//    public String getCPUWord(){
-//        return cpuWrd;
-//    }
+    public Score(){
+    //Initializing score variables to 0 when a new class instance is created
+        pScore = 0;
+        cpuScore = 0;
+    }
     
     public int getPlayerScore() {
         return pScore;
@@ -103,8 +91,8 @@ public class Score{
     
     public String endGameResults(){
         determineWinner();
-        String results;
-        results = "Your score: " + pScore + "\nComputer score: " + cpuScore + "\n" + winner;
-        return results;
+        String endResults;
+        endResults = "Your score: " + pScore + "\nComputer score: " + cpuScore + "\n" + winner;
+        return endResults;
     }
 }
