@@ -17,13 +17,14 @@ public class Words_With_Computers {
         Player player = new Player();
         Score score = new Score();
         
-        ArrayList<Character> playerRack = new ArrayList();
-        ArrayList<Character> cpuRack = new ArrayList();
+        ArrayList<String> playerRack = new ArrayList();
+        ArrayList<String> cpuRack = new ArrayList();
         playerRack = bag.fillLetterRack();
         cpuRack = bag.fillLetterRack();
         
-        player.giveLetters(playerRack);
         cpu.giveLetters(cpuRack);
+        player.giveLetters(playerRack);
+        
         
         player.displayPlayerCharacters();
         player.letPlayerInput();

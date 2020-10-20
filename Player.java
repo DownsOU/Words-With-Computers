@@ -19,10 +19,13 @@ public class Player {
     public Player() {
         configureJWordNet();
         wordnet = Dictionary.getInstance();
+        letterRack = new ArrayList();
     }
     
-    public void giveLetters(ArrayList<Character> letters) {
-        letterRack = letters;
+    public void giveLetters(ArrayList<String> letters) {
+        for(String s: letters) {
+            letterRack.add(s.charAt(0));
+        }
     }
     
     public void displayPlayerCharacters() {
