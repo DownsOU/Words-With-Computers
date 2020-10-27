@@ -17,13 +17,14 @@ public class Words_With_Computers {
         Player player = new Player();
         Score score = new Score();
         
-        ArrayList<Character> playerRack = new ArrayList();
-        ArrayList<Character> cpuRack = new ArrayList();
+        ArrayList<String> playerRack = new ArrayList();
+        ArrayList<String> cpuRack = new ArrayList();
         playerRack = bag.fillLetterRack();
         cpuRack = bag.fillLetterRack();
         
-        player.giveLetters(playerRack);
         cpu.giveLetters(cpuRack);
+        player.giveLetters(playerRack);
+        
         
         player.displayPlayerCharacters();
         player.letPlayerInput();
@@ -31,14 +32,18 @@ public class Words_With_Computers {
             System.out.println("Sorry that does not follow the rules, please try again");
             player.letPlayerInput();
         }
-        System.out.println("Player played: " + player.getPlayerInput());
+        String playerWord = player.getPlayerInput();
+        
+        System.out.println("Player played: " + playerWord);
         
         System.out.println("Computer Letters are: " + cpuRack);
         
-        System.out.println("Computer Played: " + cpu.playTurn());
+        String cpuWord = cpu.playTurn();
         
-        score.calculatePlayerScore(player.getPlayerInput());
-        score.calculateCPUScore(cpu.getComputerWord());
+        System.out.println("Computer Played: " + cpuWord);
+        
+        score.calculatePlayerScore(playerWord);
+        score.calculateCPUScore(cpuWord);
         
         System.out.println("Player Scored: " + score.getPlayerScore());
         System.out.println("Computer Scored: " + score.getCPUScore());

@@ -22,9 +22,10 @@ public class PlayComputer {
         wordnet = Dictionary.getInstance();
     }
 
-    public void giveLetters(ArrayList<Character> letterArray) {
-        for (int i = 0; i < letterArray.size(); i++) {
-            letters[i] = letterArray.get(i);
+    public void giveLetters(ArrayList<String> letterArray) {
+        int index = 0;
+        for (String s: letterArray) {
+            letters[index++] = s.charAt(0);
         }
     }
 
