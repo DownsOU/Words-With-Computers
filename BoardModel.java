@@ -1,4 +1,4 @@
-package boardplacement;
+package com.mycompany.words_with_computers;
 
 import java.util.Arrays;
 
@@ -50,7 +50,40 @@ public class BoardModel {
     public char getTileRight(int row, int column) {
         return boardArray[row][column + 1];
     }
+    
+    // Not sure if these work yet
+    public boolean adjacentClearHorizontal(int row, int startIndex, int intersection, int length){
+        boolean clear = true;
+        
+        for (int i = startIndex; i < intersection; i++){
+            if (getTileUp(row, i) != ' ' || getTileDown(row, i) != ' '){
+                clear = false;
+            }
+        }
+        
+        for (int j = intersection+1; j < length; j++){
+            if (getTileUp(row, j) != ' ' || getTileDown(row, j) != ' '){
+                clear = false;
+            }
+        }
+        return clear;
+    }
 
+ public boolean adjacentClearVertical(int column, int startIndex, int intersection, int length){
+        boolean clear = true;
+        
+        for (int i = startIndex; i < intersection; i++){
+            if (getTileLeft(i, column) != ' ' || getTileRight(i, column) != ' '){
+                clear = false;
+            }
+        }
+         for (int j = intersection+1; j < length; j++){
+            if (getTileLeft(j, column) != ' ' || getTileRight(j, column) != ' '){
+                clear = false;
+            }
+        }
+        return clear;
+    }
 
     // Check if board is empty
     public boolean isClear() {
