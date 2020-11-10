@@ -51,7 +51,7 @@ public class BoardModel {
         return boardArray[row][column + 1];
     }
     
-    // Not sure if these work yet
+   // Not tested yet
     public boolean adjacentClearHorizontal(int row, int startIndex, int intersection, int length){
         boolean clear = true;
         
@@ -61,7 +61,7 @@ public class BoardModel {
             }
         }
         
-        for (int j = intersection+1; j < length; j++){
+        for (int j = intersection+1; j < length+startIndex; j++){
             if (getTileUp(row, j) != ' ' || getTileDown(row, j) != ' '){
                 clear = false;
             }
@@ -77,13 +77,14 @@ public class BoardModel {
                 clear = false;
             }
         }
-         for (int j = intersection+1; j < length; j++){
+         for (int j = intersection+1; j < length+startIndex; j++){
             if (getTileLeft(j, column) != ' ' || getTileRight(j, column) != ' '){
                 clear = false;
             }
         }
         return clear;
     }
+
 
     // Check if board is empty
     public boolean isClear() {
