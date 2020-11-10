@@ -20,6 +20,10 @@ public class BoardModel {
     public char[][] getBoard() {
         return boardArray;
     }
+    
+    public int getSize() {
+        return size;
+    }
 
     // Set board tile to letter
     public void setTile(int row, int column, char letter) {
