@@ -29,15 +29,14 @@ public class PlayComputer {
         }
     }
 
-    public String playTurn() throws JWNLException { //returns the string of the played word
+    public ArrayList<String> playTurn() throws JWNLException { //returns the string of the played word
         
         ArrayList<String> allPossible = new ArrayList();
         ArrayList<String> words = new ArrayList();
 
         allPossible = getAllPossible(letters);
         words = checkWords(allPossible);
-        wordPlayed = chooseWord(words);
-        return wordPlayed;
+        return words;
     }
     
     public String getComputerWord() {
