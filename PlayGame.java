@@ -29,8 +29,8 @@ public class PlayGame {
         Score score = new Score();
         char[][] boardArray;
         JPanel boardView = new JPanel();
-        ArrayList <String> playerRack = new ArrayList();
-        ArrayList <String> cpuRack = new ArrayList();
+        ArrayList<String> playerRack = new ArrayList();
+        ArrayList<String> cpuRack = new ArrayList();
 
         gameTitle.setBounds(350, 20, 300, 30);
         playerScore.setBounds(200, 50, 300, 30);
@@ -111,12 +111,5 @@ public class PlayGame {
             f.add(computerScore);
             f.setVisible(true);
         }
-
-        
-        f.setVisible(true);
-        f.add(gameTitle);
-        f.setLayout(null);
-        f.setSize(900, 900);
-        f.add(boardView);
     }
 }
