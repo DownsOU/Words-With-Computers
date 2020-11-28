@@ -2,8 +2,6 @@ package com.mycompany.words_with_computers;
 
 import net.didion.jwnl.JWNLException;
 import java.util.*;
-import java.awt.Color;
-import java.awt.event.*;
 import java.awt.Font;
 import java.awt.GridLayout;
 import javax.swing.*;
@@ -21,8 +19,8 @@ public class PlayGame {
         BoardPlacement placement = new BoardPlacement(board);
         JLabel gameTitle = new JLabel("Words With Computers");
         gameTitle.setFont(new Font("Verdana", Font.PLAIN, 18));
-        JLabel playerScore = new JLabel();
-        JLabel computerScore = new JLabel();
+        JLabel playerScore = new JLabel("Player score: ");
+        JLabel computerScore = new JLabel("Computer score:");
         letterBag bag = new letterBag();
         PlayComputer cpu = new PlayComputer();
         Player player = new Player();
@@ -39,6 +37,8 @@ public class PlayGame {
         f.setLayout(null);
         f.setSize(900, 600);
         f.add(boardView);
+        f.add(playerScore);
+        f.add(computerScore);
         f.setVisible(true);
 
 
@@ -107,8 +107,7 @@ public class PlayGame {
 
             playerScore.setText("Player Scored: " + score.getPlayerScore());
             computerScore.setText("Computer Scored: " + score.getCPUScore());
-            f.add(playerScore);
-            f.add(computerScore);
+          
             f.setVisible(true);
         }
     }
