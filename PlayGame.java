@@ -25,6 +25,7 @@ public class PlayGame {
         PlayComputer cpu = new PlayComputer();
         Player player = new Player();
         Score score = new Score();
+        Turn turn = new Turn();
         char[][] boardArray;
         JPanel boardView = new JPanel();
         ArrayList<String> playerRack = new ArrayList();
@@ -41,74 +42,85 @@ public class PlayGame {
         f.add(computerScore);
         f.setVisible(true);
 
-
-        for (int i = 0; i < 5; i++) {
-
-            bag.fillComputerLetterRack();
-            bag.fillPlayerLetterRack();
-
-            cpuRack = bag.getComputerLetterRack();
-            playerRack = bag.getPlayerLetterRack();
-
-            cpu.giveLetters(cpuRack);
-            player.giveLetters(playerRack);
-
-            player.displayPlayerCharacters();
-            player.letPlayerInput();
-            while(player.checkTurn(player.getPlayerInput()) == false) {
-                System.out.println("Sorry that does not follow the rules, please try again");
-                player.letPlayerInput();
-            }
-            String playerWord = player.getPlayerInput();
-
-            player.inputPlayerPlacement();
-
-            placement.placePlayer(playerWord, player.getPlayerCoordinates()[0],
-                player.getPlayerCoordinates()[1], player.getPlayerOrientation());
+        int pScore = 0;
+        int cScore = 0;
+        
+        while(playerScore > 50 || computerScore > 50){
+            turn.playerTurn(pScore);
+            turn.computerTurn(cScore);
             
-            
-            // Following code displays latest board model on gui
-            boardArray = board.getBoard();
-            boardView = new JPanel(new GridLayout(15, 15));
-            boardView.setBounds(240, 100, 400, 400);
-            for (int j = 0; j < 15; j++) {
-                for (int k = 0; k < 15; k++) {
-                    JLabel label = new JLabel(String.valueOf(boardArray[j][k] + "."));
-                    boardView.add(label);
-                }
-            }
-            f.add(boardView);
+            playerScore.setText("Player Scored: " + pScore);
+            computerScore.setText("Computer Scored: " + cScore);
             f.setVisible(true);
+        }
+
+//        for (int i = 0; i < 5; i++) {
+//
+//          bag.fillComputerLetterRack();
+//          bag.fillPlayerLetterRack();
+//
+//            cpuRack = bag.getComputerLetterRack();
+//            playerRack = bag.getPlayerLetterRack();
+//
+//            cpu.giveLetters(cpuRack);
+//            player.giveLetters(playerRack);
+//
+//            player.displayPlayerCharacters();
+//            player.letPlayerInput();
+//            while(player.checkTurn(player.getPlayerInput()) == false) {
+//                System.out.println("Sorry that does not follow the rules, please try again");
+//                player.letPlayerInput();
+//            }
+//            String playerWord = player.getPlayerInput();
+//
+//            player.inputPlayerPlacement();
+//
+//            placement.placePlayer(playerWord, player.getPlayerCoordinates()[0],
+//                player.getPlayerCoordinates()[1], player.getPlayerOrientation());
+//            
+//            
+            // Following code displays latest board model on gui
+//            boardArray = board.getBoard();
+//            boardView = new JPanel(new GridLayout(15, 15));
+//            boardView.setBounds(240, 100, 400, 400);
+//            for (int j = 0; j < 15; j++) {
+//                for (int k = 0; k < 15; k++) {
+//                    JLabel label = new JLabel(String.valueOf(boardArray[j][k] + "."));
+//                    boardView.add(label);
+//                }
+//            }
+//            f.add(boardView);
+//            f.setVisible(true);
             //
 
             
-            System.out.println("Computer Letters are: " + cpuRack);
-            placement.placeComputer(cpu.playTurn());
+//            System.out.println("Computer Letters are: " + cpuRack);
+//            placement.placeComputer(cpu.playTurn());
 
             
-            boardArray = board.getBoard();
-            boardView = new JPanel(new GridLayout(15, 15));
-            boardView.setBounds(240, 100, 400, 400);
-            for (int j = 0; j < 15; j++) {
-                for (int k = 0; k < 15; k++) {
-                    JLabel label = new JLabel(String.valueOf(boardArray[j][k] + "."));
-                    boardView.add(label);
-                }
-            }
-            f.add(boardView);
-            f.setVisible(true);
+//            boardArray = board.getBoard();
+//            boardView = new JPanel(new GridLayout(15, 15));
+//            boardView.setBounds(240, 100, 400, 400);
+//            for (int j = 0; j < 15; j++) {
+//                for (int k = 0; k < 15; k++) {
+//                    JLabel label = new JLabel(String.valueOf(boardArray[j][k] + "."));
+//                    boardView.add(label);
+//                }
+//            }
+//            f.add(boardView);
+//            f.setVisible(true);
 
             
-            score.calculatePlayerScore(playerWord);
-            if (placement.getPlacedWord().length() > 0) {
-                score.calculateCPUScore(placement.getPlacedWord());
-            }
+  //          score.calculatePlayerScore(playerWord);
+  //          if (placement.getPlacedWord().length() > 0) {
+  //              score.calculateCPUScore(placement.getPlacedWord());
+  //          }
 
 
-            playerScore.setText("Player Scored: " + score.getPlayerScore());
-            computerScore.setText("Computer Scored: " + score.getCPUScore());
+  //          playerScore.setText("Player Scored: " + score.getPlayerScore());
+  //          computerScore.setText("Computer Scored: " + score.getCPUScore());
           
-            f.setVisible(true);
-        }
+  //          f.setVisible(true);
+ //       }
     }
 }
