@@ -53,7 +53,7 @@ public class BoardPlacement {
                     if (word.contains(Character.toString(board.getTile(i, j)))) {
                         if (board.getTileLeft(i, j) == ' ' && board.getTileRight(i, j) == ' '
                                 && checkFree(i, j, "H", word)) {
-                            System.out.println("placing letters horizontally");
+                            //System.out.println("placing letters horizontally");
                             for (int k = 0; k < word.length(); k++) {
                                 board.setTile(i, j - word.indexOf(board.getTile(i, j)) + k, word.charAt(k));
                             }
@@ -61,7 +61,7 @@ public class BoardPlacement {
                         }
                         if (board.getTileUp(i, j) == ' ' && board.getTileDown(i, j) == ' '
                                 && checkFree(i, j, "V", word)) {
-                            System.out.println("placing letters vertically");
+                            //System.out.println("placing letters vertically");
                             for (int k = 0; k < word.length(); k++) {
                                 board.setTile(i - word.indexOf(board.getTile(i, j)) + k, j, word.charAt(k));
                             }
@@ -72,15 +72,16 @@ public class BoardPlacement {
             }
         }
         System.out.println("Computer forfeits turn");
+        placedWord = "";
     }
 
     private boolean checkFree(int row, int column, String orientation, String word) {
         if (orientation.equalsIgnoreCase("H")) {
-            System.out.println("checking horizontal letters");
+            //System.out.println("checking horizontal letters");
             for (int i = 1; i <= word.length(); i++) {
                 if ((column - word.indexOf(board.getTile(row, column)) + i) < 0
                         || (column - word.indexOf(board.getTile(row, column)) + i) > 14) {
-                    System.out.println("out of bounds horizontally");
+                   // System.out.println("out of bounds horizontally");
                     return false;
                 }
             }
@@ -91,7 +92,7 @@ public class BoardPlacement {
                 }
                 if (board.getTileUp(row, (column - word.indexOf(board.getTile(row, column)) + j - 1)) != ' '
                         || board.getTileDown(row, (column - word.indexOf(board.getTile(row, column)) + j - 1)) != ' ') {
-                    System.out.println("horizontal adjacent letters not free");
+                    //System.out.println("horizontal adjacent letters not free");
                     return false;
                 }
             }
@@ -100,7 +101,7 @@ public class BoardPlacement {
             for (int i = 1; i <= word.length(); i++) {
                 if ((row - word.indexOf(board.getTile(row, column)) + i) < 0
                         || (row - word.indexOf(board.getTile(row, column)) + i) > 14) {
-                    System.out.println("Out of bounds vertically");
+                   // System.out.println("Out of bounds vertically");
                     return false;
 
                 }
@@ -112,7 +113,7 @@ public class BoardPlacement {
                 }
                 if (board.getTileLeft((row - word.indexOf(board.getTile(row, column)) + j), column) != ' '
                         || board.getTileRight((row - word.indexOf(board.getTile(row, column)) + j), column) != ' ') {
-                    System.out.println("vertical adjacent letters not free");
+                    //System.out.println("vertical adjacent letters not free");
                     return false;
                 }
             }

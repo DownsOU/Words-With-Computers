@@ -1,4 +1,4 @@
-package com.mycompany.words_with_computers;
+package words_with_computers;
 
 import net.didion.jwnl.JWNLException;
 import java.util.*;
@@ -55,7 +55,7 @@ public class PlayGame {
 
             player.displayPlayerCharacters();
             player.letPlayerInput();
-            while (player.checkTurn() == false) {
+            while(player.checkTurn(player.getPlayerInput()) == false) {
                 System.out.println("Sorry that does not follow the rules, please try again");
                 player.letPlayerInput();
             }

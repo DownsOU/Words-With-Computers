@@ -19,18 +19,27 @@ public class Player {
     private ArrayList<Character> letters = new ArrayList();
 
     private Dictionary wordnet;
-    
+    private BoardModel board;
+
     Scanner keyboard = new Scanner(System.in);
 
     public Player() {
         configureJWordNet();
         wordnet = Dictionary.getInstance();
+        board = new BoardModel();
     }
 
     public void giveLetters(ArrayList<String> letterArray) {
-        int index = 0;
-        for (String s: letterArray) {
-            letters.add(index++, s.charAt(0));
+        if (letters.isEmpty()) {
+            int index = 0;
+            for (String s : letterArray) {
+                letters.add(index++, s.charAt(0));
+            }
+        } else {
+            int index = 0;
+            for (String s : letterArray) {
+                letters.set(index++, s.charAt(0));
+            }
         }
     }
 
@@ -69,18 +78,25 @@ public class Player {
         return word.toCharArray();
     }
 
-    public boolean checkTurn() throws JWNLException {
+    public boolean checkTurn(String wordPlayed) throws JWNLException {
         IndexWord[] wordArray;
         ArrayList<Character> wordPlayedArray = new ArrayList();
-        for (int i = 0; i < word.length(); i++) {
-            wordPlayedArray.add(word.charAt(i));
+        int match = 0;
+        for (int i = 0; i < wordPlayed.length(); i++) {
+            wordPlayedArray.add(wordPlayed.charAt(i));
         }
-        if (letters.containsAll(wordPlayedArray)) {
-            wordArray = wordnet.lookupAllIndexWords(word).getIndexWordArray();
+        for(int i = 1; i<wordPlayedArray.size(); i++) {
+            if(letters.contains(wordPlayedArray.get(i))) {
+                match++;
+            }
+        }
+        if (match == wordPlayedArray.size() -1 ) {
+            wordArray = wordnet.lookupAllIndexWords(wordPlayed).getIndexWordArray();
             if (wordArray.length != 0) {
                 return true;
             }
         }
+
         return false;
     }
 
