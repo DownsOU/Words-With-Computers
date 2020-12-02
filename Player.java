@@ -81,16 +81,33 @@ public class Player {
     public boolean checkTurn(String wordPlayed) throws JWNLException {
         IndexWord[] wordArray;
         ArrayList<Character> wordPlayedArray = new ArrayList();
-        int match = 0;
+        ArrayList<Character> allLetters = new ArrayList();
+        for (Character c : letters) {
+            allLetters.add(c);
+        }
+        for (int i = 1; i < board.getBoard().length - 1; i++) {
+            for (int j = 1; j < board.getBoard().length - 1; j++) {
+                if (board.getTile(i, j) != ' ') {
+                    if (board.getTileLeft(i, j) == ' ' && board.getTileRight(i, j) == ' ') {
+                        allLetters.add(board.getTile(i, j));
+                    }
+                    if (board.getTileUp(i, j) == ' ' && board.getTileDown(i, j) == ' ') {
+                        allLetters.add(board.getTile(i, j));
+                    }
+                }
+            }
+        }
+        System.out.println("Available letters " + allLetters.toString());
+//        int match = 0;
         for (int i = 0; i < wordPlayed.length(); i++) {
             wordPlayedArray.add(wordPlayed.charAt(i));
         }
-        for(int i = 1; i<wordPlayedArray.size(); i++) {
-            if(letters.contains(wordPlayedArray.get(i))) {
-                match++;
-            }
-        }
-        if (match == wordPlayedArray.size() -1 ) {
+//        for (int i = 1; i < wordPlayedArray.size(); i++) {
+//            if (letters.contains(wordPlayedArray.get(i))) {
+//                match++;
+//            }
+//        }
+        if (allLetters.containsAll(allLetters)) {
             wordArray = wordnet.lookupAllIndexWords(wordPlayed).getIndexWordArray();
             if (wordArray.length != 0) {
                 return true;
